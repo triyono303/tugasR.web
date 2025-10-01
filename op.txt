@@ -1,0 +1,58 @@
+<?php
+
+// -----------------------------------------------------------
+// 1. MEMBUAT ARRAY DAN ENCODE KE JSON
+// -----------------------------------------------------------
+
+// Variabel array asosiatif
+$dataArray = [
+    'nama' => 'Budi Santoso',
+    'usia' => 30,
+    'kota' => 'Jakarta',
+    'hobi' => ['Membaca', 'Bersepeda', 'Memasak']
+];
+
+echo "## 1. Proses Encoding (PHP Array ke JSON)\n";
+echo "----------------------------------------\n";
+echo "Array PHP Asli:\n";
+print_r($dataArray);
+
+// Encode array ke format JSON
+$jsonString = json_encode($dataArray);
+
+echo "\nHasil Encoding (JSON String):\n";
+echo $jsonString . "\n\n";
+
+// -----------------------------------------------------------
+// 2. MENGGUNAKAN JSON STRING DAN DECODE KE DUA FORMAT PHP
+// -----------------------------------------------------------
+
+echo "## 2. Proses Decoding (JSON ke PHP Object & Array)\n";
+echo "--------------------------------------------------\n";
+
+// A. Decode ke PHP Object (Default: argumen kedua diabaikan atau false)
+$phpObject = json_decode($jsonString);
+
+echo "### A. HASIL DECODE SEBAGAI PHP OBJECT (stdClass Object) ###\n";
+print_r($phpObject);
+
+// Akses nilai pada PHP Object menggunakan operator ->
+echo "Akses Nilai PHP Object:\n";
+echo "Nama: " . $phpObject->nama . "\n";
+echo "Usia: " . $phpObject->usia . "\n";
+echo "Hobi Pertama: " . $phpObject->hobi[0] . "\n\n";
+
+
+// B. Decode ke PHP Array (Menggunakan argumen kedua: true)
+$phpArray = json_decode($jsonString, true);
+
+echo "### B. HASIL DECODE SEBAGAI PHP ARRAY (Array Asosiatif) ###\n";
+print_r($phpArray);
+
+// Akses nilai pada PHP Array menggunakan tanda kurung siku []
+echo "Akses Nilai PHP Array:\n";
+echo "Nama: " . $phpArray['nama'] . "\n";
+echo "Usia: " . $phpArray['usia'] . "\n";
+echo "Hobi Pertama: " . $phpArray['hobi'][0] . "\n";
+
+?>
